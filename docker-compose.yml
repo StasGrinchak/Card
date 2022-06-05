@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=test_name
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_password
+  web:
+    build: .
+    restart: always
+    command: >
+      sh -c "python manage.py makemigrations --noinput &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=test_name
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_password
+    depends_on:
+      - db
+    env_file:
+      - ./.env
