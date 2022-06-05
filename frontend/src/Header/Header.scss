@@ -1,0 +1,23 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  //h3 {
+  //  color: #ffb201;
+  //  font-size: 22px;
+  //}
+
+  nav {
+    align-self: center;
+
+    a {
+      text-decoration: none;
+      font-size: 20px;
+      margin-right: 15px;
+      color: #ffb201;
+    }
+
+  }
+
+}
